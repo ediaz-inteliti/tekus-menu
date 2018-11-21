@@ -1,10 +1,17 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { MainMenuComponent }      from './main-menu/main-menu.component';
+import { MealDetailComponent }  from './meal-detail/meal-detail.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
+  { path: 'meal/:codebar', component: MealDetailComponent },
+  { path: 'main', component: MainMenuComponent }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

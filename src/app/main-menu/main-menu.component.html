@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-sm-4" *ngFor="let meal of meals">
+        <div class="card">
+            <div class="card-block">
+                <h5>{{meal.name}}</h5>
+                <a routerLink="/meal/{{meal.codebar}}">
+                  Lo quiero
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
