@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { MenuService }  from '../menu.service';
-import { Meal } from '../meal';
+import { Meal } from '../model/meal';
 
 @Component({
   selector: 'app-meal-detail',

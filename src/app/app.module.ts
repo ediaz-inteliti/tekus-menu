@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MealDetailComponent } from './meal-detail/meal-detail.component';
 
+import { HttpClientModule }    from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { MealDetailComponent } from './meal-detail/meal-detail.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   bootstrap: [AppComponent]
 })
