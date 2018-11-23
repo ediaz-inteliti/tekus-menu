@@ -5,7 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { MenuService }  from '../menu.service';
+import { OrderService }  from '../order.service';
 import { Meal } from '../model/meal';
+import { Step } from '../model/step';
+import { Item } from '../model/item';
 
 @Component({
   selector: 'app-meal-detail',
@@ -15,11 +18,13 @@ import { Meal } from '../model/meal';
 export class MealDetailComponent implements OnInit {
 
   meal: Meal;
+  mealOrder: Meal;
 
   constructor(
     private route: ActivatedRoute,
-    private heroService: MenuService,
-    private location: Location
+    private menuService: MenuService,
+    private location: Location,
+    private orderService: OrderService
   ) { }
 
   ngOnInit() {
@@ -28,8 +33,15 @@ export class MealDetailComponent implements OnInit {
 
   getMeal(): void {
     const codebar = +this.route.snapshot.paramMap.get('codebar');
-    this.heroService.getMeal(codebar)
-      .subscribe(meal => this.meal = meal);
+    this.menuService.getMeal(codebar)
+      .subscribe(meal => {
+        this.meal = meal;
+        this.orderService.addMeal(meal);
+      });
+    
   }
 
+  onItemSelected(item: Item): void{
+    this.orderService.addItem({codebar:this.meal.codebar,item:item});
+  }
 }

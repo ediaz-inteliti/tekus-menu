@@ -1,3 +1,50 @@
-<p>
-    meal-detail works! {{meal.name}}
-</p>
+<div *ngIf="meal">
+    <p>
+        meal-detail works! {{meal.name}}
+    </p>
+    <div class="card m-3">
+        <div class="card-body">
+            <!-- Vertical Steppers -->
+            <div class="row mt-1">
+                <div class="col-md-12">
+
+                    <!-- Stepers Wrapper -->
+                    <ul class="stepper stepper-vertical">
+
+                        <!-- First Step -->
+                        <li class="completed" *ngFor="let step of meal.steps">
+                            <a href="#!">
+                                <span class="circle"></span>
+                                <span class="label">{{step.name}}</span>
+                            </a>
+
+                            <div>
+                                <p>{{step.description}}</p>
+                                <div class="row">
+                                    <div class="col-sm-4" *ngFor="let item of step.items">
+                                        <div class="card">
+                                            <div class="card-block">
+                                                <h5>{{item.name}}</h5>
+                                                <p>{{item.description}}</p>
+                                                <a>
+                                                            Lo quiero
+                                                        </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </li>
+
+                    </ul>
+                    <!-- /.Stepers Wrapper -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

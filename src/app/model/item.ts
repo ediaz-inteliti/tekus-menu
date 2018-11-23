@@ -4,5 +4,10 @@ export class Item {
     nameStyle: string;
     description: string;
     image: string;
-    available: boolean
+    available: boolean;
+    selected: boolean;
+
+    constructor() {
+        this.selected = false;
+    }
 }

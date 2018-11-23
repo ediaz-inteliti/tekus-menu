@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
 export class MenuService {
 
   private apiURL: string = "http://cdn.tekus.co/PT2018/Products.json";
-  private meals : Meal[] = [];;
+  private meals : Meal[] = [];
 
 
   constructor(private http: HttpClient) { }
@@ -26,7 +26,19 @@ export class MenuService {
   }
 
   getMeal(codebar: number): Observable<Meal> {
-    return of(this.meals.find(meal => meal.codebar === codebar));
+    if(this.meals.length > 0){
+      return of(this.meals.find(meal => meal.codebar === codebar));
+    }
+    
+    
+    return this.http.get<Meal[]>(this.apiURL).pipe(map((meals: Meal[]) => {
+      this.meals = meals;
+      
+      return meals.find(meal => meal.codebar === codebar);
+    }));
+
+    
+    
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

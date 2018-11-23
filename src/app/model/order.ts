@@ -1,5 +1,6 @@
 import { Meal } from './meal';
+import { Item } from './item';
 export class Order {
-    meals : Meal[];
-    total : number;
+    meal : Meal;
+    items : Item[];
 }

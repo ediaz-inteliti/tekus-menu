@@ -8,6 +8,8 @@ import { MealDetailComponent } from './meal-detail/meal-detail.component';
 
 import { HttpClientModule }    from '@angular/common/http';
 
+import { FormWizardModule } from 'angular2-wizard';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { HttpClientModule }    from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormWizardModule
   ],
   bootstrap: [AppComponent]
 })

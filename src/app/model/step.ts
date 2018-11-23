@@ -7,4 +7,9 @@ export class Step {
     selectableItems: number;
     available: boolean;
     items: Item[];
+    selected: boolean;
+
+    constructor() {
+        this.selected = false;
+    }
 }

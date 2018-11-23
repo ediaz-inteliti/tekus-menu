@@ -2,6 +2,7 @@
 import { Step } from './step';
 
 export class Meal {
+
     codebar: number;
     name: string;
     nameStyle: string;
@@ -11,4 +12,7 @@ export class Meal {
     available: boolean;
     deal: boolean;
     steps: Step[];
+    
+
+
 }
