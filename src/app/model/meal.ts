@@ -13,6 +13,4 @@ export class Meal {
     deal: boolean;
     steps: Step[];
     
-
-
 }

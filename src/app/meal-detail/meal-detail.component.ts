@@ -29,10 +29,11 @@ export class MealDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getMeal();
-    
-    
   }
 
+  /**
+   * Obtiene informacion del platillo para mostrarlo en la vista de detalle
+   */
   getMeal(): void {
     const codebar = +this.route.snapshot.paramMap.get('codebar');
      
@@ -46,6 +47,10 @@ export class MealDetailComponent implements OnInit {
     
   }
 
+  /**
+   * Obtiene objeto de platillo que se esta pidiendo
+   * @param orderKey 
+   */
   getOrder(orderKey): void {
     this.orderService.getOrder(orderKey)
       .subscribe(order => {
@@ -53,18 +58,25 @@ export class MealDetailComponent implements OnInit {
       });
   }
 
+  /**
+   * Event Handler cada vez se selecciona un item de un paso de personalizacion del pedido
+   * @param step 
+   * @param item 
+   */
   onItemSelected(step: Step, item: Item): void{
     if(step.selectableItems==1 && this.order.stepItems[step.id].length>0){
-
       this.orderService.clearStep(this.orderKey,step.id);
-
     }
     this.orderService.addItem(this.orderKey,step.id,item);
     this.condition = true;
   }
 
+  /**
+   * Permite saber si un item fue seleccionado
+   * @param step 
+   * @param item 
+   */
   isItemSelected(step: Step, item: Item): boolean{
-    
     for(let j=0; j<this.order.stepItems[step.id].length; j++){
       if(this.order.stepItems[step.id][j].id==item.id){
         return true;
@@ -73,7 +85,10 @@ export class MealDetailComponent implements OnInit {
     return false;
   }
 
-
+  /**
+   * Indica en que paso se encuentra
+   * @param stepId 
+   */
   currentStep(stepId: number): boolean{
     if(stepId==this.currentStepId){
       return true;
@@ -81,6 +96,9 @@ export class MealDetailComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Se mueve al siguiente paso
+   */
   nextStep(): void{
     let nextStepIndex = 0;
     for(let i=0;i<this.meal.steps.length; i++){
@@ -93,6 +111,9 @@ export class MealDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Regresa al paso anterior
+   */
   prevStep(): void{
     let prevStepIndex = 0;
     for(let i=0;i<this.meal.steps.length; i++){
@@ -105,6 +126,9 @@ export class MealDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Indica si esta en el primer paso de seleccion
+   */
   isFirstStep(): boolean{
     if(this.currentStepId==this.meal.steps[0].id){
       return true;
@@ -112,6 +136,9 @@ export class MealDetailComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Indica si esta en el ultimo paso de seleccion
+   */
   isLastStep(): boolean{
     let len = this.meal.steps.length;
     if(this.currentStepId==this.meal.steps[len-1].id){
@@ -120,6 +147,9 @@ export class MealDetailComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Elimina la el platillo del pedido y regresa a la pantalla principal
+   */
   cancelOrder(): void{
     this.orderService.removeOrder(this.orderKey);
     this.router.navigate(['/main']);

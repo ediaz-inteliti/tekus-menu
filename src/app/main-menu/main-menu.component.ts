@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent implements OnInit {
+
   meals: Meal[] = [];
   orders: Order[];
   total: number;
@@ -27,20 +28,27 @@ export class MainMenuComponent implements OnInit {
     this.getTotal();
   }
 
+  /**
+   * Obtiene los platillos para mostrar en la vista principal
+   */
   getMeals(): void {
     this.menuService.getMeals()
         .subscribe(meals => this.meals = meals);
   }
 
+  /**
+   * Obtiene los platillos que se han pedido para mostrar en la vista principal
+   */
   getOrders(): void {
     this.orderService.getOrders()
       .subscribe(orders => {
         this.orders = orders;
       });
-
-    
   }
 
+  /**
+   * Obtiene el total del pedido
+   */
   getTotal(): void{
     this.orderService.getOrderTotal()
       .subscribe(total => {
@@ -48,19 +56,30 @@ export class MainMenuComponent implements OnInit {
       });
   }
 
+  /**
+   * Elimina un platillo del pedido del cliente
+   * @param orderKey 
+   */
   removeOrder(orderKey): void{
     this.orderService.removeOrder(orderKey);
     this.getTotal();
   }
 
+  /**
+   * Lleva a detalle para agregar platillo al pedido del cliente
+   * @param meal 
+   */
   addMeal(meal): void{
     if(meal.available){
       this.router.navigate(['/meal/'+meal.codebar]);
     }
-    
   }
 
-  getStepItemsArray(stepItems): any[]{
+  /**
+   * Retorna un arreglo de string con las opciones de cada platillo
+   * @param stepItems 
+   */
+  getStepItemsArray(stepItems): string[]{
     let items = [];
     let stepItemsProps = Object.keys(stepItems);
     for (let id of stepItemsProps) { 
@@ -71,6 +90,9 @@ export class MainMenuComponent implements OnInit {
     return items;
   }
 
+  /**
+   * Verifica que haya algun platillo en el pedido
+   */
   isAnyOrder(): boolean{
     if(this.orders.length>0){
       return true;
