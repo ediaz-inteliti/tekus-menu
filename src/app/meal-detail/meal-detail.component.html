@@ -1,9 +1,24 @@
-<div *ngIf="meal">
-    <p>
-        meal-detail works! {{meal.name}}
-    </p>
-    <div class="card m-3">
-        <div class="card-body">
+<div class="container">
+    <div *ngIf="meal">
+        <div class="meal-detail-descr">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img [src]="meal.image" alt="" class="rounded img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h2>
+                        {{meal.name}}
+                    </h2>
+                    <div>
+                        <h4>Precio: {{meal.price | currency}}</h4>
+                        <h4 class="text-success" *ngIf="meal.deal">OFERTA</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="meal-detail-options">
+            <h3>Opciones:</h3>
+            <p>Selecciones las opciones de su menu y luego presiona continuar</p>
             <!-- Vertical Steppers -->
             <div class="row mt-1">
                 <div class="col-md-12">
@@ -12,39 +27,43 @@
                     <ul class="stepper stepper-vertical">
 
                         <!-- First Step -->
-                        <li class="completed" *ngFor="let step of meal.steps">
-                            <a href="#!">
-                                <span class="circle"></span>
-                                <span class="label">{{step.name}}</span>
-                            </a>
-
+                        <li [class.active]="currentStep(step.id)" *ngFor="let step of meal.steps">
+                            <h4>{{step.name}}</h4>
                             <div>
                                 <p>{{step.description}}</p>
                                 <div class="row">
                                     <div class="col-sm-4" *ngFor="let item of step.items">
-                                        <div class="card">
+                                        <div class="card p-2 mb-3" [class.active]="isItemSelected(step,item)" (click)="onItemSelected(step,item)">
                                             <div class="card-block">
+                                                <img [src]="item.image" alt="" class="rounded img-fluid">
                                                 <h5>{{item.name}}</h5>
                                                 <p>{{item.description}}</p>
-                                                <a>
-                                                            Lo quiero
-                                                        </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
 
                         </li>
 
                     </ul>
-                    <!-- /.Stepers Wrapper -->
+                    <button class="btn btn-danger btn-lg m-2" (click)="cancelOrder()">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-success btn-lg m-2 float-right" *ngIf="isLastStep()" routerLink="/main">
+                        Platillo Listo
+                    </button>
+                    <button class="btn btn-secondary btn-lg m-2 float-right" *ngIf="!isLastStep()" (click)="nextStep()">
+                        Continuar
+                    </button>
 
+                    <button class="btn btn-secondary btn-lg m-2 float-right" *ngIf="!isFirstStep()" (click)="prevStep()">
+                        Regresar
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>

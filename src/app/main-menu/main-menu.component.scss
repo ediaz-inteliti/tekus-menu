@@ -1,0 +1,40 @@
+@import "../../variables.scss";
+#meals {
+    .card {
+        -webkit-box-shadow: 12px 17px 30px -15px rgba(41, 41, 41, 1);
+        -moz-box-shadow: 12px 17px 30px -15px rgba(41, 41, 41, 1);
+        box-shadow: 12px 17px 30px -15px rgba(41, 41, 41, 1);
+        border: 0px;
+        min-height: 330px;
+        cursor: pointer;
+        img {
+            width: 100%;
+        }
+    }
+    margin-bottom: 50%;
+}
+
+#orders-table {
+    border-top: solid 3px $light-complementary-brand-color;
+    background-color: $light-brand-color;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    overflow-y: auto;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    ul {
+        padding: 0;
+        list-style: none;
+        li {
+            width: 100%;
+            h4 {
+                display: inline;
+            }
+        }
+        li.order-meal {
+            border-bottom: solid 1px gainsboro;
+        }
+    }
+}

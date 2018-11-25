@@ -1,12 +1,36 @@
-<div class="row">
-    <div class="col-sm-4" *ngFor="let meal of meals">
-        <div class="card">
-            <div class="card-block">
-                <h5>{{meal.name}}</h5>
-                <a routerLink="/meal/{{meal.codebar}}">
-                  Lo quiero
-                </a>
+<div class="container">
+    <div id="meals" class="row">
+        <div class="col-sm-4" *ngFor="let meal of meals">
+
+            <div class="card mb-4 p-2" (click)="addMeal(meal)">
+                <div class="card-block">
+                    <img [src]="meal.image" alt="" class="rounded img-fluid">
+                    <h4 class="mt-2 mb-1">{{meal.name}}</h4>
+                    <h5>Precio: {{meal.price | currency}}</h5>
+                    <h5 class="text-success" *ngIf="meal.deal"><strong>OFERTA</strong></h5>
+                    <h5 class="text-danger" *ngIf="!meal.available"><strong>AGOTADO</strong></h5>
+                </div>
             </div>
+
         </div>
     </div>
+</div>
+
+<div id="orders-table" *ngIf="isAnyOrder()">
+    <div class="container">
+        <h2>Tu pedido</h2>
+        <ul>
+            <li *ngFor="let order of orders; let i = index" class="order-meal pb-2 mb-3">
+                <h4>{{order.meal.name}}</h4>
+                <button class="btn btn-danger float-right btn-sm" (click)="removeOrder(i)">eliminar</button>
+                <ul>
+                    <li *ngFor="let options of getStepItemsArray(order.stepItems)">
+                        {{options}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <h3>Total: {{total | currency}}</h3>
+    </div>
+
 </div>

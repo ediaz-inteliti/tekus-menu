@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background: url('/assets/bg_wood.jpg');
+    background-size: cover;
+    background-position: center center;
+    * {
+        font-family: 'Gentium Book Basic', serif;
+    }
+    h1,
+    h2,
+    h3 {
+        font-family: 'Alfa Slab One', cursive, sans-serif;
+    }
+}

@@ -1,7 +1,19 @@
-body {
+@import "../variables.scss";
+header {
+    text-align: center;
     h1 {
-        color: #369;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 250%;
+        background-color: $complementary-brand-color;
+        color: $light-brand-color;
+        text-transform: uppercase;
+        display: inline-block;
+        margin: 40px auto;
+        padding: 30px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 12px 17px 30px -15px rgba(41, 41, 41, 1);
+        -moz-box-shadow: 12px 17px 30px -15px rgba(41, 41, 41, 1);
+        box-shadow: 12px 17px 30px -15px rgba(41, 41, 41, 1);
+        border: solid 3px $light-complementary-brand-color;
     }
 }
